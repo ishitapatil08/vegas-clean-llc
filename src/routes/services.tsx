@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
-import { SERVICES } from "@/components/site/data";
-import { MessageSquare, Phone, Check } from "lucide-react";
+import { MessageSquare, Check } from "lucide-react";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -17,59 +16,169 @@ export const Route = createFileRoute("/services")({
   component: ServicesPage,
 });
 
-const DETAILS: Record<string, string[]> = {
-  "Deep Cleaning": ["Baseboards, vents & light fixtures", "Inside appliances on request", "Detailed bathroom scrubbing", "Hand-wiped surfaces top to bottom"],
-  "Move-In / Move-Out": ["Full kitchen & bath detail", "Inside cabinets, drawers & closets", "Floors, baseboards & windows", "Move-out ready or move-in fresh"],
-  "Recurring Cleaning": ["Weekly, bi-weekly, or monthly", "Same trusted cleaner each visit", "Customized checklist for your home", "Easy to reschedule by text"],
-  "Airbnb / Vacation Rental": ["Reliable same-day turnovers", "Fresh linens & restock support", "Photo confirmations available", "Spotless 5-star guest experience"],
-  "Office & Commercial": ["After-hours scheduling available", "Restrooms, break rooms & desks", "Trash removal & touchpoint sanitizing", "Recurring or one-time visits"],
-  "Post-Construction": ["Fine dust removal", "Paint, adhesive & residue cleanup", "Window, fixture & floor detail", "Final walk-through ready"],
+type Service = {
+  name: string;
+  imageLabel: string;
+  desc: string;
+  bullets: string[];
 };
+
+const RESIDENTIAL: Service[] = [
+  {
+    name: "Deep Cleaning",
+    imageLabel: "[SERVICE: Deep Cleaning]",
+    desc: "A top-to-bottom reset for your home. We tackle the build-up that everyday cleaning leaves behind, leaving every surface sanitized and shining.",
+    bullets: ["Full home scrub down", "Baseboards, vents & light fixtures", "Inside appliances on request", "Detailed sanitization & disinfecting"],
+  },
+  {
+    name: "Recurring Cleaning",
+    imageLabel: "[SERVICE: Recurring Cleaning]",
+    desc: "Keep your home consistently fresh with weekly, bi-weekly, or monthly visits. You'll get the same trusted cleaner every time.",
+    bullets: ["Weekly, bi-weekly or monthly", "Same consistent cleaner each visit", "Flexible scheduling by text", "Customized checklist for your home"],
+  },
+  {
+    name: "Move-In / Move-Out",
+    imageLabel: "[SERVICE: Move-In / Move-Out]",
+    desc: "Whether you're handing over keys or settling in, we make the property spotless. Our move-out cleans are focused on getting your deposit back.",
+    bullets: ["Full property cleaning", "Deposit-back guarantee focus", "Inside cabinets, drawers & closets", "Available on weekends"],
+  },
+  {
+    name: "Airbnb Cleaning",
+    imageLabel: "[SERVICE: Airbnb Turnover]",
+    desc: "Hotel-quality turnovers that earn 5-star reviews. We schedule quickly between guests so your listing stays booked.",
+    bullets: ["Hotel-quality turnovers", "Quick scheduling between guests", "Fresh linen & towel service", "Restock support & photo confirmations"],
+  },
+];
+
+const COMMERCIAL: Service[] = [
+  {
+    name: "Office Cleaning",
+    imageLabel: "[SERVICE: Office Cleaning]",
+    desc: "Keep your workspace healthy and presentable for staff and clients. We work around your schedule with discreet, professional service.",
+    bullets: ["Daily or weekly maintenance", "After-hours service available", "Supply restocking", "Restrooms, break rooms & desks"],
+  },
+  {
+    name: "Post-Construction",
+    imageLabel: "[SERVICE: Post-Construction]",
+    desc: "We make new builds and remodels reveal-ready. Fine dust and construction debris are no match for our detailed process.",
+    bullets: ["Dust & debris removal", "Window cleaning", "Floor polishing", "Reveal-ready final detail"],
+  },
+];
+
+const INCLUDED = {
+  Kitchen: ["Counters & backsplash", "Exterior of appliances", "Sink scrubbed & sanitized", "Cabinets wiped down", "Floors mopped"],
+  Bathroom: ["Tub, shower & tile", "Toilets disinfected", "Mirrors & fixtures", "Counters & sinks", "Floors mopped"],
+  "Living Areas": ["Dusting all surfaces", "Vacuum carpets & rugs", "Hard floors mopped", "Furniture wiped", "Trash removed"],
+  Bedrooms: ["Dusting & cobweb removal", "Beds made (linens on request)", "Floors vacuumed/mopped", "Mirrors & glass", "Surfaces sanitized"],
+};
+
+function ServiceCard({ s }: { s: Service }) {
+  return (
+    <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition border border-[#e6f1fb] overflow-hidden flex flex-col">
+      <div className="aspect-[16/10] bg-[#e6f1fb] flex items-center justify-center text-[#185fa5] font-semibold text-sm border-b border-[#e6f1fb]">
+        {s.imageLabel}
+      </div>
+      <div className="p-6 flex-1 flex flex-col">
+        <h3 className="text-xl font-bold text-[#0c447c]">{s.name}</h3>
+        <p className="mt-2 text-[#1a2233]/70 text-sm">{s.desc}</p>
+        <ul className="mt-4 space-y-2">
+          {s.bullets.map((b) => (
+            <li key={b} className="flex items-start gap-2 text-sm text-[#1a2233]/80">
+              <Check className="h-4 w-4 text-[#1d9e75] mt-0.5 shrink-0" /> {b}
+            </li>
+          ))}
+        </ul>
+        <a
+          href="sms:2195460135"
+          className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#1d9e75] hover:bg-[#178a64] text-white px-5 py-3 font-bold transition"
+        >
+          📱 Text to Book This Service
+        </a>
+      </div>
+    </div>
+  );
+}
 
 function ServicesPage() {
   return (
     <SiteLayout>
-      <section className="bg-[#0c447c] text-white py-16 sm:py-20">
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-[#185fa5] to-[#0c447c] text-white py-16 sm:py-24">
         <div className="container-x text-center max-w-3xl">
           <h1 style={{ fontSize: "clamp(32px, 5vw, 50px)" }}>Our Cleaning Services</h1>
-          <p className="mt-4 text-white/85 text-lg">Tailored cleaning for every home, rental, and workspace in Northwest Indiana.</p>
+          <p className="mt-4 text-white/85 text-lg">
+            Professional, reliable cleaning for homes and businesses across Northwest Indiana
+          </p>
         </div>
       </section>
 
+      {/* Residential */}
+      <section className="py-16 bg-white">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <p className="text-[#1d9e75] font-semibold uppercase tracking-wide text-sm">Residential</p>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-[#0c447c]">Residential Cleaning Services</h2>
+            <p className="mt-3 text-[#1a2233]/70">Trusted cleaning for every kind of home across NW Indiana.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {RESIDENTIAL.map((s) => <ServiceCard key={s.name} s={s} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* Commercial */}
       <section className="py-16 bg-[#f4f7fb]">
-        <div className="container-x grid md:grid-cols-2 gap-6">
-          {SERVICES.map((s) => (
-            <div key={s.name} className="bg-white rounded-2xl p-7 shadow-sm hover:shadow-lg transition border border-[#e6f1fb]">
-              <div className="flex items-start gap-4">
-                <div className="text-4xl shrink-0">{s.icon}</div>
-                <div className="min-w-0">
-                  <h2 className="text-2xl font-bold text-[#0c447c]">{s.name}</h2>
-                  <p className="mt-2 text-[#1a2233]/70">{s.desc}</p>
-                </div>
-              </div>
-              <ul className="mt-5 space-y-2">
-                {DETAILS[s.name].map((d) => (
-                  <li key={d} className="flex items-start gap-2 text-sm text-[#1a2233]/80">
-                    <Check className="h-4 w-4 text-[#1d9e75] mt-0.5 shrink-0" /> {d}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 h-1 w-16 bg-[#1d9e75] rounded-full" />
-            </div>
-          ))}
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <p className="text-[#1d9e75] font-semibold uppercase tracking-wide text-sm">Commercial</p>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-[#0c447c]">Commercial Cleaning Services</h2>
+            <p className="mt-3 text-[#1a2233]/70">Reliable, professional service for your business or job site.</p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {COMMERCIAL.map((s) => <ServiceCard key={s.name} s={s} />)}
+          </div>
         </div>
       </section>
 
-      <section className="py-16 bg-gradient-to-br from-[#1d9e75] to-[#178a64] text-white">
+      {/* What's Included */}
+      <section className="py-16 bg-white">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#0c447c]">What's Included In Every Clean</h2>
+            <p className="mt-3 text-[#1a2233]/70">
+              Every visit includes our complete attention to detail across every room.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Object.entries(INCLUDED).map(([room, items]) => (
+              <div key={room} className="bg-[#e6f1fb] rounded-2xl p-6 border border-[#185fa5]/10">
+                <h3 className="text-lg font-bold text-[#0c447c] mb-4">{room}</h3>
+                <ul className="space-y-2">
+                  {items.map((it) => (
+                    <li key={it} className="flex items-start gap-2 text-sm text-[#1a2233]/80">
+                      <Check className="h-4 w-4 text-[#1d9e75] mt-0.5 shrink-0" /> {it}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bottom CTA */}
+      <section className="py-16 bg-gradient-to-br from-[#185fa5] to-[#0c447c] text-white">
         <div className="container-x text-center max-w-2xl">
-          <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)" }}>Not sure which service you need?</h2>
-          <p className="mt-3 text-white/95">Send us a text — we'll help you pick the perfect cleaning for your space.</p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a href="sms:2195460135" className="inline-flex items-center gap-2 rounded-full bg-white text-[#0c447c] hover:bg-[#e6f1fb] px-6 py-3 font-bold transition">
-              <MessageSquare className="h-5 w-5" /> Text for a Free Quote
-            </a>
-            <a href="tel:2195460135" className="inline-flex items-center gap-2 rounded-full border-2 border-white hover:bg-white hover:text-[#0c447c] px-6 py-3 font-bold transition">
-              <Phone className="h-5 w-5" /> (219) 546-0135
+          <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)" }}>Not Sure Which Service You Need?</h2>
+          <p className="mt-3 text-white/90">
+            Tell us about your space and we'll recommend the perfect clean for you.
+          </p>
+          <div className="mt-6 flex justify-center">
+            <a
+              href="sms:2195460135"
+              className="inline-flex items-center gap-2 rounded-full bg-[#1d9e75] hover:bg-[#178a64] text-white px-7 py-3.5 font-bold transition"
+            >
+              <MessageSquare className="h-5 w-5" /> 📱 Text Us & We'll Help
             </a>
           </div>
         </div>
