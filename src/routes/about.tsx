@@ -7,6 +7,10 @@ import beforeKitchen from "@/assets/before-kitchen.jpg";
 import afterKitchen from "@/assets/after-kitchen.jpg";
 import beforeBathroom from "@/assets/before-bathroom.jpg";
 import afterBathroom from "@/assets/after-bathroom.jpg";
+import baTubCollage from "@/assets/ba-tub-collage.jpeg.asset.json";
+import baShowerCollage from "@/assets/ba-shower-collage.jpeg.asset.json";
+import livingBright from "@/assets/living-bright.jpeg.asset.json";
+import livingModern from "@/assets/living-modern.jpeg.asset.json";
 
 
 export const Route = createFileRoute("/about")({
@@ -174,6 +178,41 @@ function AboutPage() {
                   </div>
                 </div>
                 <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{p.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Real client collages */}
+          <div className="mt-10 grid md:grid-cols-2 gap-8">
+            {[
+              { src: baTubCollage.url, label: "Tub Restoration", alt: "Before and after of a yellow bathtub deep clean" },
+              { src: baShowerCollage.url, label: "Marble Shower Reset", alt: "Before and after of a marble tile shower deep clean" },
+            ].map((c) => (
+              <div key={c.label} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition">
+                <img src={c.src} alt={c.alt} loading="lazy" className="w-full h-auto object-cover" />
+                <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{c.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* RECENT CLEANS */}
+      <section className="py-20 bg-white">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-[#1d9e75] font-semibold text-sm uppercase tracking-wider">Recent Work</span>
+            <h2 className="mt-3 text-[#0c447c]" style={{ fontSize: "clamp(24px, 4vw, 40px)" }}>
+              Homes We've Recently Cleaned
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              { src: livingBright.url, alt: "Bright living room with vaulted ceiling after Vegas Clean service" },
+              { src: livingModern.url, alt: "Modern dark-toned living room cleaned by Vegas Clean" },
+            ].map((p) => (
+              <div key={p.src} className="rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition bg-[#f4f7fb]">
+                <img src={p.src} alt={p.alt} loading="lazy" className="w-full h-full object-cover aspect-[4/3]" />
               </div>
             ))}
           </div>
