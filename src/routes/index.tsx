@@ -254,6 +254,9 @@ function HomePage() {
             <h2 style={{ fontSize: "clamp(24px, 4vw, 40px)" }}>Serving Northwest Indiana</h2>
             <p className="mt-3 text-white/80">Proudly cleaning homes and businesses across 12 cities in Lake & Porter counties.</p>
           </div>
+          <div className="mb-10 max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-white/10">
+            <img src={serviceAreasMap} alt="Map of Vegas Clean service areas across Northwest Indiana" loading="lazy" width={1216} height={608} className="w-full h-auto" />
+          </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto">
             {CITIES.map((c) => (
               <div key={c} className="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-sm font-medium transition">
