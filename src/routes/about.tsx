@@ -151,15 +151,15 @@ function AboutPage() {
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition">
                 <div className="grid grid-cols-2">
                   <div className="relative aspect-square">
-                    <img src={p.b.url} alt={`Before — ${p.label}`} className="w-full h-full object-cover grayscale" />
+                    <img src={p.b} alt={`Before — ${p.label}`} loading="lazy" width={800} height={800} className="w-full h-full object-cover" />
                     <span className="absolute top-3 left-3 bg-[#0c447c] text-white text-xs font-bold px-3 py-1 rounded-full">BEFORE</span>
                   </div>
                   <div className="relative aspect-square">
-                    <img src={p.a.url} alt={`After — ${p.label}`} className="w-full h-full object-cover" />
+                    <img src={p.a} alt={`After — ${p.label}`} loading="lazy" width={800} height={800} className="w-full h-full object-cover" />
                     <span className="absolute top-3 left-3 bg-[#1d9e75] text-white text-xs font-bold px-3 py-1 rounded-full">AFTER</span>
                   </div>
                 </div>
-                <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{p.label} · [BEFORE/AFTER IMAGE PAIR]</div>
+                <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{p.label}</div>
               </div>
             ))}
           </div>
