@@ -7,6 +7,10 @@ import beforeKitchen from "@/assets/before-kitchen.jpg";
 import afterKitchen from "@/assets/after-kitchen.jpg";
 import beforeBathroom from "@/assets/before-bathroom.jpg";
 import afterBathroom from "@/assets/after-bathroom.jpg";
+import baTubCollage from "@/assets/ba-tub-collage.jpeg.asset.json";
+import baShowerCollage from "@/assets/ba-shower-collage.jpeg.asset.json";
+import livingBright from "@/assets/living-bright.jpeg.asset.json";
+import livingModern from "@/assets/living-modern.jpeg.asset.json";
 
 
 export const Route = createFileRoute("/about")({
