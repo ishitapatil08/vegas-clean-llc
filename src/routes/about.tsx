@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { MessageSquare, Search, Clock, Key, Languages, ShieldCheck, Sparkles, HeartHandshake } from "lucide-react";
-import living from "@/assets/living.jpg.asset.json";
-import kitchen from "@/assets/kitchen.jpg.asset.json";
-import baTub from "@/assets/ba-tub.jpg.asset.json";
-import baShower from "@/assets/ba-shower.jpg.asset.json";
+import ownerMaribel from "@/assets/owner-maribel.jpg";
+import teamWorking from "@/assets/team-working.jpg";
+import beforeKitchen from "@/assets/before-kitchen.jpg";
+import afterKitchen from "@/assets/after-kitchen.jpg";
+import beforeBathroom from "@/assets/before-bathroom.jpg";
+import afterBathroom from "@/assets/after-bathroom.jpg";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -35,10 +38,8 @@ const VALUES = [
 
 function AboutPage() {
   const pairs = [
-    { b: baTub, a: baTub, label: "Bathtub Refresh" },
-    { b: baShower, a: baShower, label: "Shower Restoration" },
-    { b: kitchen, a: kitchen, label: "Kitchen Deep Clean" },
-    { b: living, a: living, label: "Living Room Detail" },
+    { b: beforeBathroom, a: afterBathroom, label: "Bathroom Refresh" },
+    { b: beforeKitchen, a: afterKitchen, label: "Kitchen Deep Clean" },
   ];
 
   return (
@@ -62,11 +63,8 @@ function AboutPage() {
       {/* OWNER STORY */}
       <section className="py-20 bg-white">
         <div className="container-x grid lg:grid-cols-2 gap-12 items-center">
-          <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl relative">
-            <img src={living.url} alt="Vegas Clean LLC owner Maribel Vega" className="w-full h-full object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-5">
-              <span className="text-white/90 text-xs uppercase tracking-wider font-semibold">[MARIBEL OWNER PHOTO]</span>
-            </div>
+          <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl">
+            <img src={ownerMaribel} alt="Maribel Vega, founder of Vegas Clean LLC" loading="lazy" width={640} height={800} className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="text-[#1d9e75] font-semibold text-sm uppercase tracking-wider">Our Story</span>
@@ -116,6 +114,20 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* TEAM AT WORK */}
+      <section className="relative h-[320px] sm:h-[420px] overflow-hidden">
+        <img src={teamWorking} alt="Vegas Clean team cleaning a kitchen" loading="lazy" width={1216} height={608} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0c447c]/85 via-[#0c447c]/45 to-transparent" aria-hidden />
+        <div className="relative container-x h-full flex items-center">
+          <div className="max-w-lg text-white">
+            <span className="text-[#7fd4b3] font-semibold text-sm uppercase tracking-wider">Our Team</span>
+            <h2 className="mt-3 font-extrabold" style={{ fontSize: "clamp(24px, 4vw, 38px)" }}>A Crew That Treats Your Home Like Their Own</h2>
+            <p className="mt-3 text-white/90">Friendly, uniformed, and trained to our detail-first standard.</p>
+          </div>
+        </div>
+      </section>
+
+
       {/* VALUES */}
       <section className="py-20 bg-white">
         <div className="container-x">
@@ -153,15 +165,15 @@ function AboutPage() {
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition">
                 <div className="grid grid-cols-2">
                   <div className="relative aspect-square">
-                    <img src={p.b.url} alt={`Before — ${p.label}`} className="w-full h-full object-cover grayscale" />
+                    <img src={p.b} alt={`Before — ${p.label}`} loading="lazy" width={800} height={800} className="w-full h-full object-cover" />
                     <span className="absolute top-3 left-3 bg-[#0c447c] text-white text-xs font-bold px-3 py-1 rounded-full">BEFORE</span>
                   </div>
                   <div className="relative aspect-square">
-                    <img src={p.a.url} alt={`After — ${p.label}`} className="w-full h-full object-cover" />
+                    <img src={p.a} alt={`After — ${p.label}`} loading="lazy" width={800} height={800} className="w-full h-full object-cover" />
                     <span className="absolute top-3 left-3 bg-[#1d9e75] text-white text-xs font-bold px-3 py-1 rounded-full">AFTER</span>
                   </div>
                 </div>
-                <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{p.label} · [BEFORE/AFTER IMAGE PAIR]</div>
+                <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{p.label}</div>
               </div>
             ))}
           </div>

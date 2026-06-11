@@ -1,11 +1,27 @@
+import deepClean from "@/assets/service-deep-clean.jpg";
+import moveInOut from "@/assets/service-move-in-out.jpg";
+import recurring from "@/assets/service-recurring.jpg";
+import airbnb from "@/assets/service-airbnb.jpg";
+import office from "@/assets/service-office.jpg";
+import postConstruction from "@/assets/service-post-construction.jpg";
+
 export const SERVICES = [
-  { icon: "✨", name: "Deep Cleaning", desc: "Top-to-bottom detailed cleaning that resets your entire home." },
-  { icon: "📦", name: "Move-In / Move-Out", desc: "Spotless turnover cleans for renters, buyers, and sellers." },
-  { icon: "🔄", name: "Recurring Cleaning", desc: "Weekly, bi-weekly, or monthly visits to keep things effortless." },
-  { icon: "🏖️", name: "Airbnb / Vacation Rental", desc: "Fast, reliable turnovers between guest stays — every time." },
-  { icon: "🏢", name: "Office & Commercial", desc: "Healthy, professional workspaces your team will love." },
-  { icon: "🔨", name: "Post-Construction", desc: "Dust, debris, and residue removed after remodels & builds." },
+  { icon: "✨", name: "Deep Cleaning", desc: "Top-to-bottom detailed cleaning that resets your entire home.", image: deepClean, alt: "Professional deep cleaning of white bathroom tiles" },
+  { icon: "📦", name: "Move-In / Move-Out", desc: "Spotless turnover cleans for renters, buyers, and sellers.", image: moveInOut, alt: "Empty apartment with moving boxes after cleaning" },
+  { icon: "🔄", name: "Recurring Cleaning", desc: "Weekly, bi-weekly, or monthly visits to keep things effortless.", image: recurring, alt: "Cozy clean living room after recurring service" },
+  { icon: "🏖️", name: "Airbnb / Vacation Rental", desc: "Fast, reliable turnovers between guest stays — every time.", image: airbnb, alt: "Hotel-quality Airbnb bedroom turnover" },
+  { icon: "🏢", name: "Office & Commercial", desc: "Healthy, professional workspaces your team will love.", image: office, alt: "Spotless modern office after commercial cleaning" },
+  { icon: "🔨", name: "Post-Construction", desc: "Dust, debris, and residue removed after remodels & builds.", image: postConstruction, alt: "Bright home interior after post-construction clean" },
 ];
+
+export const SERVICE_IMAGES = {
+  deepClean,
+  moveInOut,
+  recurring,
+  airbnb,
+  office,
+  postConstruction,
+};
 
 export const CITIES = [
   "Hammond, IN", "Munster, IN", "Schererville, IN", "Dyer, IN",

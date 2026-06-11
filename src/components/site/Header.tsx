@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X, Phone, MessageSquare, Sparkles } from "lucide-react";
-import logoAsset from "@/assets/logo.png.asset.json";
+import logoUrl from "@/assets/logo-vc.png";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -23,7 +23,7 @@ export function Header() {
       <header className="sticky top-0 z-50 bg-[#0c447c] text-white shadow-md">
         <div className="container-x flex items-center justify-between gap-4 py-3">
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src={logoAsset.url} alt="Vegas Clean LLC" className="h-10 w-auto bg-white rounded-md p-1" />
+            <img src={logoUrl} alt="Vegas Clean LLC" className="h-11 w-auto bg-white rounded-md p-1" width={220} height={88} />
             <span className="sr-only">Vegas Clean LLC</span>
           </Link>
 

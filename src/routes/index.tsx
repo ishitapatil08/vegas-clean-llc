@@ -2,10 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { SERVICES, CITIES, REVIEWS } from "@/components/site/data";
 import { MessageSquare, Phone, Mail, Star, MapPin, ArrowRight, Check } from "lucide-react";
-import kitchen from "@/assets/kitchen.jpg.asset.json";
-import living from "@/assets/living.jpg.asset.json";
-import baTub from "@/assets/ba-tub.jpg.asset.json";
-import baShower from "@/assets/ba-shower.jpg.asset.json";
+import heroBg from "@/assets/hero-bg.jpg";
+import ownerMaribel from "@/assets/owner-maribel.jpg";
+import beforeKitchen from "@/assets/before-kitchen.jpg";
+import afterKitchen from "@/assets/after-kitchen.jpg";
+import beforeBathroom from "@/assets/before-bathroom.jpg";
+import afterBathroom from "@/assets/after-bathroom.jpg";
+import serviceAreasMap from "@/assets/service-areas.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,10 +42,13 @@ function HomePage() {
     <SiteLayout>
       {/* HERO */}
       <section className="relative overflow-hidden text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${kitchen.url})` }}
-          aria-hidden
+        <img
+          src={heroBg}
+          alt="Bright clean Midwest home interior — Vegas Clean LLC"
+          className="absolute inset-0 w-full h-full object-cover"
+          width={1920}
+          height={896}
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-[#0c447c]/95 via-[#185fa5]/85 to-[#0c447c]/90" aria-hidden />
         <div className="relative container-x py-20 sm:py-28 lg:py-36">
@@ -93,9 +99,18 @@ function HomePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {SERVICES.map((s) => (
               <div key={s.name} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-[#e6f1fb]">
-                <div className="aspect-square bg-[#e6f1fb] flex items-center justify-center text-6xl">{s.icon}</div>
+                <div className="aspect-[4/3] overflow-hidden bg-[#e6f1fb]">
+                  <img
+                    src={s.image}
+                    alt={s.alt}
+                    loading="lazy"
+                    width={800}
+                    height={600}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-[#0c447c]">{s.name}</h3>
+                  <h3 className="text-lg font-bold text-[#0c447c]"><span className="mr-2">{s.icon}</span>{s.name}</h3>
                   <p className="mt-2 text-sm text-[#1a2233]/70">{s.desc}</p>
                   <div className="mt-4 h-1 w-12 bg-[#1d9e75] rounded-full group-hover:w-20 transition-all" />
                 </div>
@@ -114,7 +129,7 @@ function HomePage() {
       <section className="py-20 bg-white">
         <div className="container-x grid lg:grid-cols-2 gap-12 items-center">
           <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl">
-            <img src={living.url} alt="Clean living room by Vegas Clean LLC" className="w-full h-full object-cover" />
+            <img src={ownerMaribel} alt="Maribel Vega, founder of Vegas Clean LLC" loading="lazy" width={640} height={800} className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="text-[#1d9e75] font-semibold text-sm uppercase tracking-wider">About Vegas Clean LLC</span>
@@ -142,9 +157,22 @@ function HomePage() {
             <p className="mt-3 text-[#1a2233]/70">Real results from real Northwest Indiana homes.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
-            {[baTub, baShower].map((img, i) => (
-              <div key={i} className="rounded-2xl overflow-hidden shadow-lg bg-white">
-                <img src={img.url} alt={`Before and after cleaning ${i + 1}`} className="w-full h-auto" />
+            {[
+              { before: beforeKitchen, after: afterKitchen, label: "Kitchen Transformation" },
+              { before: beforeBathroom, after: afterBathroom, label: "Bathroom Refresh" },
+            ].map((p) => (
+              <div key={p.label} className="rounded-2xl overflow-hidden shadow-lg bg-white">
+                <div className="grid grid-cols-2">
+                  <div className="relative aspect-[4/3]">
+                    <img src={p.before} alt={`Before — ${p.label}`} loading="lazy" width={800} height={600} className="w-full h-full object-cover" />
+                    <span className="absolute top-3 left-3 bg-[#0c447c] text-white text-xs font-bold px-3 py-1 rounded-full">BEFORE</span>
+                  </div>
+                  <div className="relative aspect-[4/3]">
+                    <img src={p.after} alt={`After — ${p.label}`} loading="lazy" width={800} height={600} className="w-full h-full object-cover" />
+                    <span className="absolute top-3 left-3 bg-[#1d9e75] text-white text-xs font-bold px-3 py-1 rounded-full">AFTER</span>
+                  </div>
+                </div>
+                <div className="p-4 text-center text-sm font-semibold text-[#0c447c]">{p.label}</div>
               </div>
             ))}
           </div>
@@ -225,6 +253,9 @@ function HomePage() {
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 style={{ fontSize: "clamp(24px, 4vw, 40px)" }}>Serving Northwest Indiana</h2>
             <p className="mt-3 text-white/80">Proudly cleaning homes and businesses across 12 cities in Lake & Porter counties.</p>
+          </div>
+          <div className="mb-10 max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-xl border border-white/10">
+            <img src={serviceAreasMap} alt="Map of Vegas Clean service areas across Northwest Indiana" loading="lazy" width={1216} height={608} className="w-full h-auto" />
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 max-w-4xl mx-auto">
             {CITIES.map((c) => (
