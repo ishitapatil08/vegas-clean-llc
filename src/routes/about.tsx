@@ -1,10 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { MessageSquare, Search, Clock, Key, Languages, ShieldCheck, Sparkles, HeartHandshake } from "lucide-react";
-import living from "@/assets/living.jpg.asset.json";
-import kitchen from "@/assets/kitchen.jpg.asset.json";
-import baTub from "@/assets/ba-tub.jpg.asset.json";
-import baShower from "@/assets/ba-shower.jpg.asset.json";
+import ownerMaribel from "@/assets/owner-maribel.jpg";
+import teamWorking from "@/assets/team-working.jpg";
+import beforeKitchen from "@/assets/before-kitchen.jpg";
+import afterKitchen from "@/assets/after-kitchen.jpg";
+import beforeBathroom from "@/assets/before-bathroom.jpg";
+import afterBathroom from "@/assets/after-bathroom.jpg";
+import cleaningSupplies from "@/assets/cleaning-supplies.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -35,10 +38,8 @@ const VALUES = [
 
 function AboutPage() {
   const pairs = [
-    { b: baTub, a: baTub, label: "Bathtub Refresh" },
-    { b: baShower, a: baShower, label: "Shower Restoration" },
-    { b: kitchen, a: kitchen, label: "Kitchen Deep Clean" },
-    { b: living, a: living, label: "Living Room Detail" },
+    { b: beforeBathroom, a: afterBathroom, label: "Bathroom Refresh" },
+    { b: beforeKitchen, a: afterKitchen, label: "Kitchen Deep Clean" },
   ];
 
   return (
@@ -62,11 +63,8 @@ function AboutPage() {
       {/* OWNER STORY */}
       <section className="py-20 bg-white">
         <div className="container-x grid lg:grid-cols-2 gap-12 items-center">
-          <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl relative">
-            <img src={living.url} alt="Vegas Clean LLC owner Maribel Vega" className="w-full h-full object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-5">
-              <span className="text-white/90 text-xs uppercase tracking-wider font-semibold">[MARIBEL OWNER PHOTO]</span>
-            </div>
+          <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl">
+            <img src={ownerMaribel} alt="Maribel Vega, founder of Vegas Clean LLC" loading="lazy" width={640} height={800} className="w-full h-full object-cover" />
           </div>
           <div>
             <span className="text-[#1d9e75] font-semibold text-sm uppercase tracking-wider">Our Story</span>
