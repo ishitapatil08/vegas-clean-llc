@@ -114,6 +114,20 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* TEAM AT WORK */}
+      <section className="relative h-[320px] sm:h-[420px] overflow-hidden">
+        <img src={teamWorking} alt="Vegas Clean team cleaning a kitchen" loading="lazy" width={1216} height={608} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0c447c]/85 via-[#0c447c]/45 to-transparent" aria-hidden />
+        <div className="relative container-x h-full flex items-center">
+          <div className="max-w-lg text-white">
+            <span className="text-[#7fd4b3] font-semibold text-sm uppercase tracking-wider">Our Team</span>
+            <h2 className="mt-3 font-extrabold" style={{ fontSize: "clamp(24px, 4vw, 38px)" }}>A Crew That Treats Your Home Like Their Own</h2>
+            <p className="mt-3 text-white/90">Friendly, uniformed, and trained to our detail-first standard.</p>
+          </div>
+        </div>
+      </section>
+
+
       {/* VALUES */}
       <section className="py-20 bg-white">
         <div className="container-x">
