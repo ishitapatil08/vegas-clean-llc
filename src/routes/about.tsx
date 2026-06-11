@@ -7,7 +7,7 @@ import beforeKitchen from "@/assets/before-kitchen.jpg";
 import afterKitchen from "@/assets/after-kitchen.jpg";
 import beforeBathroom from "@/assets/before-bathroom.jpg";
 import afterBathroom from "@/assets/after-bathroom.jpg";
-import cleaningSupplies from "@/assets/cleaning-supplies.jpg";
+
 
 export const Route = createFileRoute("/about")({
   head: () => ({
