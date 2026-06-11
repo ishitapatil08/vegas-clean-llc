@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { MessageSquare, Check } from "lucide-react";
+import { SERVICE_IMAGES } from "@/components/site/data";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -18,7 +19,8 @@ export const Route = createFileRoute("/services")({
 
 type Service = {
   name: string;
-  imageLabel: string;
+  image: string;
+  alt: string;
   desc: string;
   bullets: string[];
 };
@@ -26,25 +28,29 @@ type Service = {
 const RESIDENTIAL: Service[] = [
   {
     name: "Deep Cleaning",
-    imageLabel: "[SERVICE: Deep Cleaning]",
+    image: SERVICE_IMAGES.deepClean,
+    alt: "Professional deep cleaning of bathroom tiles",
     desc: "A top-to-bottom reset for your home. We tackle the build-up that everyday cleaning leaves behind, leaving every surface sanitized and shining.",
     bullets: ["Full home scrub down", "Baseboards, vents & light fixtures", "Inside appliances on request", "Detailed sanitization & disinfecting"],
   },
   {
     name: "Recurring Cleaning",
-    imageLabel: "[SERVICE: Recurring Cleaning]",
+    image: SERVICE_IMAGES.recurring,
+    alt: "Cozy living room kept clean with recurring service",
     desc: "Keep your home consistently fresh with weekly, bi-weekly, or monthly visits. You'll get the same trusted cleaner every time.",
     bullets: ["Weekly, bi-weekly or monthly", "Same consistent cleaner each visit", "Flexible scheduling by text", "Customized checklist for your home"],
   },
   {
     name: "Move-In / Move-Out",
-    imageLabel: "[SERVICE: Move-In / Move-Out]",
+    image: SERVICE_IMAGES.moveInOut,
+    alt: "Empty apartment with moving boxes after move-out clean",
     desc: "Whether you're handing over keys or settling in, we make the property spotless. Our move-out cleans are focused on getting your deposit back.",
     bullets: ["Full property cleaning", "Deposit-back guarantee focus", "Inside cabinets, drawers & closets", "Available on weekends"],
   },
   {
     name: "Airbnb Cleaning",
-    imageLabel: "[SERVICE: Airbnb Turnover]",
+    image: SERVICE_IMAGES.airbnb,
+    alt: "Hotel-quality vacation rental bedroom after turnover",
     desc: "Hotel-quality turnovers that earn 5-star reviews. We schedule quickly between guests so your listing stays booked.",
     bullets: ["Hotel-quality turnovers", "Quick scheduling between guests", "Fresh linen & towel service", "Restock support & photo confirmations"],
   },
@@ -53,13 +59,15 @@ const RESIDENTIAL: Service[] = [
 const COMMERCIAL: Service[] = [
   {
     name: "Office Cleaning",
-    imageLabel: "[SERVICE: Office Cleaning]",
+    image: SERVICE_IMAGES.office,
+    alt: "Spotless modern office after commercial cleaning",
     desc: "Keep your workspace healthy and presentable for staff and clients. We work around your schedule with discreet, professional service.",
     bullets: ["Daily or weekly maintenance", "After-hours service available", "Supply restocking", "Restrooms, break rooms & desks"],
   },
   {
     name: "Post-Construction",
-    imageLabel: "[SERVICE: Post-Construction]",
+    image: SERVICE_IMAGES.postConstruction,
+    alt: "Brand new home interior after post-construction cleanup",
     desc: "We make new builds and remodels reveal-ready. Fine dust and construction debris are no match for our detailed process.",
     bullets: ["Dust & debris removal", "Window cleaning", "Floor polishing", "Reveal-ready final detail"],
   },
@@ -75,8 +83,8 @@ const INCLUDED = {
 function ServiceCard({ s }: { s: Service }) {
   return (
     <div className="bg-white rounded-2xl shadow-sm hover:shadow-lg transition border border-[#e6f1fb] overflow-hidden flex flex-col">
-      <div className="aspect-[16/10] bg-[#e6f1fb] flex items-center justify-center text-[#185fa5] font-semibold text-sm border-b border-[#e6f1fb]">
-        {s.imageLabel}
+      <div className="aspect-[16/10] bg-[#e6f1fb] overflow-hidden">
+        <img src={s.image} alt={s.alt} loading="lazy" width={800} height={500} className="w-full h-full object-cover" />
       </div>
       <div className="p-6 flex-1 flex flex-col">
         <h3 className="text-xl font-bold text-[#0c447c]">{s.name}</h3>
