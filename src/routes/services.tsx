@@ -2,6 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
 import { MessageSquare, Check } from "lucide-react";
 import { SERVICE_IMAGES } from "@/components/site/data";
+import proof1 from "@/assets/proof-1.mp4.asset.json";
+import proof2 from "@/assets/proof-2.mp4.asset.json";
+import proof3 from "@/assets/proof-3.mp4.asset.json";
+import proof4 from "@/assets/proof-4.mp4.asset.json";
+
+const PROOF_VIDEOS = [
+  { src: proof1.url, label: "Bathroom Deep Clean" },
+  { src: proof2.url, label: "Kitchen Reset" },
+  { src: proof3.url, label: "Tile & Shower Detail" },
+  { src: proof4.url, label: "Whole-Home Refresh" },
+];
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -168,6 +179,31 @@ function ServicesPage() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Service Proofs — Videos */}
+      <section className="py-16 bg-[#f4f7fb]">
+        <div className="container-x">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <p className="text-[#1d9e75] font-semibold uppercase tracking-wide text-sm">Service Proofs</p>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-bold text-[#0c447c]">See Our Work In Action</h2>
+            <p className="mt-3 text-[#1a2233]/70">Real before-and-after walkthroughs from recent Vegas Clean jobs.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {PROOF_VIDEOS.map((v) => (
+              <div key={v.src} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition border border-[#e6f1fb]">
+                <video
+                  src={v.src}
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full aspect-[9/16] object-cover bg-black"
+                />
+                <div className="p-3 text-center text-sm font-semibold text-[#0c447c]">{v.label}</div>
               </div>
             ))}
           </div>
