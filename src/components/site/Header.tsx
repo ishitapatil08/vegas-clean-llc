@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { Menu, X, Phone, MessageSquare, Sparkles } from "lucide-react";
 import logoUrl from "@/assets/logo-vc.png";
 
@@ -29,15 +29,18 @@ export function Header() {
 
           <nav className="hidden lg:flex items-center gap-7">
             {nav.map((n) => (
-              <Link
+              <NavLink
                 key={n.to}
                 to={n.to}
-                className="text-sm font-medium text-white/90 hover:text-white transition-colors"
-                activeProps={{ className: "text-white font-semibold" }}
-                activeOptions={{ exact: n.to === "/" }}
+                end={n.to === "/"}
+                className={({ isActive }) =>
+                  `text-sm font-medium transition-colors ${
+                    isActive ? "text-white font-semibold" : "text-white/90 hover:text-white"
+                  }`
+                }
               >
                 {n.label}
-              </Link>
+              </NavLink>
             ))}
           </nav>
 
