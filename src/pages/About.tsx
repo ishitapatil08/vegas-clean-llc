@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { useSeo } from "@/lib/seo";
 import { MessageSquare, Search, Clock, Key, Languages, ShieldCheck, Sparkles, HeartHandshake } from "lucide-react";
 import ownerMaribel from "@/assets/owner-maribel.jpg";
 import teamWorking from "@/assets/team-working.jpg";
@@ -11,21 +11,6 @@ import baTubCollage from "@/assets/ba-tub-collage.jpeg.asset.json";
 import baShowerCollage from "@/assets/ba-shower-collage.jpeg.asset.json";
 import livingBright from "@/assets/living-bright.jpeg.asset.json";
 import livingModern from "@/assets/living-modern.jpeg.asset.json";
-
-
-export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Maribel Vega | Vegas Clean LLC" },
-      { name: "description", content: "Meet Maribel Vega, founder of Vegas Clean LLC — 4+ years of trusted, detail-oriented, bilingual cleaning across Northwest Indiana." },
-      { property: "og:title", content: "About Vegas Clean LLC" },
-      { property: "og:description", content: "Trust, dedication, and a passion for clean — across NW Indiana." },
-      { property: "og:url", content: "/about" },
-    ],
-    links: [{ rel: "canonical", href: "/about" }],
-  }),
-  component: AboutPage,
-});
 
 const FEATURES = [
   { i: Search, e: "🔍", t: "Detail-Oriented", d: "We clean what others miss. Baseboards, corners, behind appliances." },
@@ -40,7 +25,15 @@ const VALUES = [
   { i: HeartHandshake, t: "Reliability", d: "Show-up rate matters. Maribel and her team arrive when promised and deliver the same quality every single time." },
 ];
 
-function AboutPage() {
+export default function AboutPage() {
+  useSeo({
+    title: "About Maribel Vega | Vegas Clean LLC",
+    description: "Meet Maribel Vega, founder of Vegas Clean LLC — 4+ years of trusted, detail-oriented, bilingual cleaning across Northwest Indiana.",
+    ogTitle: "About Vegas Clean LLC",
+    ogDescription: "Trust, dedication, and a passion for clean — across NW Indiana.",
+    path: "/about",
+  });
+
   const pairs = [
     { b: beforeBathroom, a: afterBathroom, label: "Bathroom Refresh" },
     { b: beforeKitchen, a: afterKitchen, label: "Kitchen Deep Clean" },
@@ -48,7 +41,6 @@ function AboutPage() {
 
   return (
     <SiteLayout>
-      {/* HERO */}
       <section className="relative text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0c447c] via-[#185fa5] to-[#0c447c]" aria-hidden />
         <div className="relative container-x py-20 sm:py-28 text-center">
@@ -64,7 +56,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* OWNER STORY */}
       <section className="py-20 bg-white">
         <div className="container-x grid lg:grid-cols-2 gap-12 items-center">
           <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl">
@@ -92,7 +83,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
       <section className="py-20 bg-[#e6f1fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -118,7 +108,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* TEAM AT WORK */}
       <section className="relative h-[320px] sm:h-[420px] overflow-hidden">
         <img src={teamWorking} alt="Vegas Clean team cleaning a kitchen" loading="lazy" width={1216} height={608} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0c447c]/85 via-[#0c447c]/45 to-transparent" aria-hidden />
@@ -131,8 +120,6 @@ function AboutPage() {
         </div>
       </section>
 
-
-      {/* VALUES */}
       <section className="py-20 bg-white">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -155,7 +142,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* BEFORE / AFTER GALLERY */}
       <section className="py-20 bg-[#f4f7fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -182,7 +168,6 @@ function AboutPage() {
             ))}
           </div>
 
-          {/* Real client collages */}
           <div className="mt-10 grid md:grid-cols-2 gap-8">
             {[
               { src: baTubCollage.url, label: "Tub Restoration", alt: "Before and after of a yellow bathtub deep clean" },
@@ -197,7 +182,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* RECENT CLEANS */}
       <section className="py-20 bg-white">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -219,7 +203,6 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20 bg-gradient-to-br from-[#1d9e75] to-[#178a64] text-white">
         <div className="container-x text-center max-w-2xl">
           <h2 style={{ fontSize: "clamp(28px, 5vw, 44px)" }}>Ready to Experience the Vegas Clean Difference?</h2>

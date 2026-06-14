@@ -1,5 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { useSeo } from "@/lib/seo";
 import { MessageSquare, Check } from "lucide-react";
 import { SERVICE_IMAGES } from "@/components/site/data";
 import proof1 from "@/assets/proof-1.mp4.asset.json";
@@ -14,20 +14,6 @@ const PROOF_VIDEOS = [
   { src: proof4.url, label: "Whole-Home Refresh" },
 ];
 
-export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Cleaning Services | Vegas Clean LLC — NW Indiana" },
-      { name: "description", content: "Deep cleaning, move-in/out, recurring, Airbnb turnover, office and post-construction cleaning across Northwest Indiana." },
-      { property: "og:title", content: "Our Cleaning Services — Vegas Clean LLC" },
-      { property: "og:description", content: "Residential & commercial cleaning across NW Indiana." },
-      { property: "og:url", content: "/services" },
-    ],
-    links: [{ rel: "canonical", href: "/services" }],
-  }),
-  component: ServicesPage,
-});
-
 type Service = {
   name: string;
   image: string;
@@ -37,51 +23,15 @@ type Service = {
 };
 
 const RESIDENTIAL: Service[] = [
-  {
-    name: "Deep Cleaning",
-    image: SERVICE_IMAGES.deepClean,
-    alt: "Professional deep cleaning of bathroom tiles",
-    desc: "A top-to-bottom reset for your home. We tackle the build-up that everyday cleaning leaves behind, leaving every surface sanitized and shining.",
-    bullets: ["Full home scrub down", "Baseboards, vents & light fixtures", "Inside appliances on request", "Detailed sanitization & disinfecting"],
-  },
-  {
-    name: "Recurring Cleaning",
-    image: SERVICE_IMAGES.recurring,
-    alt: "Cozy living room kept clean with recurring service",
-    desc: "Keep your home consistently fresh with weekly, bi-weekly, or monthly visits. You'll get the same trusted cleaner every time.",
-    bullets: ["Weekly, bi-weekly or monthly", "Same consistent cleaner each visit", "Flexible scheduling by text", "Customized checklist for your home"],
-  },
-  {
-    name: "Move-In / Move-Out",
-    image: SERVICE_IMAGES.moveInOut,
-    alt: "Empty apartment with moving boxes after move-out clean",
-    desc: "Whether you're handing over keys or settling in, we make the property spotless. Our move-out cleans are focused on getting your deposit back.",
-    bullets: ["Full property cleaning", "Deposit-back guarantee focus", "Inside cabinets, drawers & closets", "Available on weekends"],
-  },
-  {
-    name: "Airbnb Cleaning",
-    image: SERVICE_IMAGES.airbnb,
-    alt: "Hotel-quality vacation rental bedroom after turnover",
-    desc: "Hotel-quality turnovers that earn 5-star reviews. We schedule quickly between guests so your listing stays booked.",
-    bullets: ["Hotel-quality turnovers", "Quick scheduling between guests", "Fresh linen & towel service", "Restock support & photo confirmations"],
-  },
+  { name: "Deep Cleaning", image: SERVICE_IMAGES.deepClean, alt: "Professional deep cleaning of bathroom tiles", desc: "A top-to-bottom reset for your home. We tackle the build-up that everyday cleaning leaves behind, leaving every surface sanitized and shining.", bullets: ["Full home scrub down", "Baseboards, vents & light fixtures", "Inside appliances on request", "Detailed sanitization & disinfecting"] },
+  { name: "Recurring Cleaning", image: SERVICE_IMAGES.recurring, alt: "Cozy living room kept clean with recurring service", desc: "Keep your home consistently fresh with weekly, bi-weekly, or monthly visits. You'll get the same trusted cleaner every time.", bullets: ["Weekly, bi-weekly or monthly", "Same consistent cleaner each visit", "Flexible scheduling by text", "Customized checklist for your home"] },
+  { name: "Move-In / Move-Out", image: SERVICE_IMAGES.moveInOut, alt: "Empty apartment with moving boxes after move-out clean", desc: "Whether you're handing over keys or settling in, we make the property spotless. Our move-out cleans are focused on getting your deposit back.", bullets: ["Full property cleaning", "Deposit-back guarantee focus", "Inside cabinets, drawers & closets", "Available on weekends"] },
+  { name: "Airbnb Cleaning", image: SERVICE_IMAGES.airbnb, alt: "Hotel-quality vacation rental bedroom after turnover", desc: "Hotel-quality turnovers that earn 5-star reviews. We schedule quickly between guests so your listing stays booked.", bullets: ["Hotel-quality turnovers", "Quick scheduling between guests", "Fresh linen & towel service", "Restock support & photo confirmations"] },
 ];
 
 const COMMERCIAL: Service[] = [
-  {
-    name: "Office Cleaning",
-    image: SERVICE_IMAGES.office,
-    alt: "Spotless modern office after commercial cleaning",
-    desc: "Keep your workspace healthy and presentable for staff and clients. We work around your schedule with discreet, professional service.",
-    bullets: ["Daily or weekly maintenance", "After-hours service available", "Supply restocking", "Restrooms, break rooms & desks"],
-  },
-  {
-    name: "Post-Construction",
-    image: SERVICE_IMAGES.postConstruction,
-    alt: "Brand new home interior after post-construction cleanup",
-    desc: "We make new builds and remodels reveal-ready. Fine dust and construction debris are no match for our detailed process.",
-    bullets: ["Dust & debris removal", "Window cleaning", "Floor polishing", "Reveal-ready final detail"],
-  },
+  { name: "Office Cleaning", image: SERVICE_IMAGES.office, alt: "Spotless modern office after commercial cleaning", desc: "Keep your workspace healthy and presentable for staff and clients. We work around your schedule with discreet, professional service.", bullets: ["Daily or weekly maintenance", "After-hours service available", "Supply restocking", "Restrooms, break rooms & desks"] },
+  { name: "Post-Construction", image: SERVICE_IMAGES.postConstruction, alt: "Brand new home interior after post-construction cleanup", desc: "We make new builds and remodels reveal-ready. Fine dust and construction debris are no match for our detailed process.", bullets: ["Dust & debris removal", "Window cleaning", "Floor polishing", "Reveal-ready final detail"] },
 ];
 
 const INCLUDED = {
@@ -107,10 +57,7 @@ function ServiceCard({ s }: { s: Service }) {
             </li>
           ))}
         </ul>
-        <a
-          href="sms:2195460135"
-          className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#1d9e75] hover:bg-[#178a64] text-white px-5 py-3 font-bold transition"
-        >
+        <a href="sms:2195460135" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#1d9e75] hover:bg-[#178a64] text-white px-5 py-3 font-bold transition">
           📱 Text to Book This Service
         </a>
       </div>
@@ -118,20 +65,24 @@ function ServiceCard({ s }: { s: Service }) {
   );
 }
 
-function ServicesPage() {
+export default function ServicesPage() {
+  useSeo({
+    title: "Cleaning Services | Vegas Clean LLC — NW Indiana",
+    description: "Deep cleaning, move-in/out, recurring, Airbnb turnover, office and post-construction cleaning across Northwest Indiana.",
+    ogTitle: "Our Cleaning Services — Vegas Clean LLC",
+    ogDescription: "Residential & commercial cleaning across NW Indiana.",
+    path: "/services",
+  });
+
   return (
     <SiteLayout>
-      {/* Hero */}
       <section className="bg-gradient-to-br from-[#185fa5] to-[#0c447c] text-white py-16 sm:py-24">
         <div className="container-x text-center max-w-3xl">
           <h1 style={{ fontSize: "clamp(32px, 5vw, 50px)" }}>Our Cleaning Services</h1>
-          <p className="mt-4 text-white/85 text-lg">
-            Professional, reliable cleaning for homes and businesses across Northwest Indiana
-          </p>
+          <p className="mt-4 text-white/85 text-lg">Professional, reliable cleaning for homes and businesses across Northwest Indiana</p>
         </div>
       </section>
 
-      {/* Residential */}
       <section className="py-16 bg-white">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -145,7 +96,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* Commercial */}
       <section className="py-16 bg-[#f4f7fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -159,14 +109,11 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* What's Included */}
       <section className="py-16 bg-white">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-[#0c447c]">What's Included In Every Clean</h2>
-            <p className="mt-3 text-[#1a2233]/70">
-              Every visit includes our complete attention to detail across every room.
-            </p>
+            <p className="mt-3 text-[#1a2233]/70">Every visit includes our complete attention to detail across every room.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Object.entries(INCLUDED).map(([room, items]) => (
@@ -185,7 +132,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* Service Proofs — Videos */}
       <section className="py-16 bg-[#f4f7fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -196,13 +142,7 @@ function ServicesPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {PROOF_VIDEOS.map((v) => (
               <div key={v.src} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition border border-[#e6f1fb]">
-                <video
-                  src={v.src}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="w-full aspect-[9/16] object-cover bg-black"
-                />
+                <video src={v.src} controls playsInline preload="metadata" className="w-full aspect-[9/16] object-cover bg-black" />
                 <div className="p-3 text-center text-sm font-semibold text-[#0c447c]">{v.label}</div>
               </div>
             ))}
@@ -210,18 +150,12 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* Bottom CTA */}
       <section className="py-16 bg-gradient-to-br from-[#185fa5] to-[#0c447c] text-white">
         <div className="container-x text-center max-w-2xl">
           <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)" }}>Not Sure Which Service You Need?</h2>
-          <p className="mt-3 text-white/90">
-            Tell us about your space and we'll recommend the perfect clean for you.
-          </p>
+          <p className="mt-3 text-white/90">Tell us about your space and we'll recommend the perfect clean for you.</p>
           <div className="mt-6 flex justify-center">
-            <a
-              href="sms:2195460135"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1d9e75] hover:bg-[#178a64] text-white px-7 py-3.5 font-bold transition"
-            >
+            <a href="sms:2195460135" className="inline-flex items-center gap-2 rounded-full bg-[#1d9e75] hover:bg-[#178a64] text-white px-7 py-3.5 font-bold transition">
               <MessageSquare className="h-5 w-5" /> 📱 Text Us & We'll Help
             </a>
           </div>

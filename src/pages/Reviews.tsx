@@ -1,20 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/site/Layout";
+import { useSeo } from "@/lib/seo";
 import { MessageSquare, Star, Facebook, Quote } from "lucide-react";
-
-export const Route = createFileRoute("/reviews")({
-  head: () => ({
-    meta: [
-      { title: "Client Reviews | Vegas Clean LLC — 5-Star NW Indiana Cleaning" },
-      { name: "description", content: "Real 5-star reviews from Northwest Indiana families. See why clients trust Vegas Clean LLC year after year." },
-      { property: "og:title", content: "Reviews — Vegas Clean LLC" },
-      { property: "og:description", content: "Real reviews from real NW Indiana clients." },
-      { property: "og:url", content: "/reviews" },
-    ],
-    links: [{ rel: "canonical", href: "/reviews" }],
-  }),
-  component: ReviewsPage,
-});
 
 const FULL_REVIEWS = [
   {
@@ -31,10 +17,17 @@ const FULL_REVIEWS = [
   },
 ];
 
-function ReviewsPage() {
+export default function ReviewsPage() {
+  useSeo({
+    title: "Client Reviews | Vegas Clean LLC — 5-Star NW Indiana Cleaning",
+    description: "Real 5-star reviews from Northwest Indiana families. See why clients trust Vegas Clean LLC year after year.",
+    ogTitle: "Reviews — Vegas Clean LLC",
+    ogDescription: "Real reviews from real NW Indiana clients.",
+    path: "/reviews",
+  });
+
   return (
     <SiteLayout>
-      {/* HERO */}
       <section className="bg-gradient-to-br from-[#0c447c] via-[#185fa5] to-[#0c447c] text-white py-20 sm:py-24">
         <div className="container-x text-center max-w-3xl">
           <h1 style={{ fontSize: "clamp(32px, 6vw, 56px)" }}>What Our Clients Are Saying</h1>
@@ -42,7 +35,6 @@ function ReviewsPage() {
         </div>
       </section>
 
-      {/* OVERALL RATING */}
       <section className="bg-[#185fa5] text-white py-10">
         <div className="container-x text-center">
           <div className="text-6xl sm:text-7xl font-extrabold" style={{ fontFamily: "var(--font-display)" }}>5.0</div>
@@ -55,7 +47,6 @@ function ReviewsPage() {
         </div>
       </section>
 
-      {/* FEATURED REVIEWS */}
       <section className="py-20 bg-[#f4f7fb]">
         <div className="container-x grid lg:grid-cols-2 gap-6 max-w-6xl">
           {FULL_REVIEWS.map((r) => (
@@ -79,35 +70,21 @@ function ReviewsPage() {
         </div>
       </section>
 
-      {/* LEAVE A REVIEW */}
       <section className="py-16 bg-white">
         <div className="container-x text-center max-w-2xl">
-          <h2 className="text-[#0c447c]" style={{ fontSize: "clamp(24px, 4vw, 36px)" }}>
-            Happy with our service? We'd love to hear from you!
-          </h2>
+          <h2 className="text-[#0c447c]" style={{ fontSize: "clamp(24px, 4vw, 36px)" }}>Happy with our service? We'd love to hear from you!</h2>
           <p className="mt-3 text-[#1a2233]/70">Your review helps other Northwest Indiana families find us.</p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.google.com/search?q=Vegas+Clean+LLC+Hammond+Indiana"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#185fa5] hover:bg-[#0c447c] text-white px-6 py-3 font-bold transition"
-            >
+            <a href="https://www.google.com/search?q=Vegas+Clean+LLC+Hammond+Indiana" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#185fa5] hover:bg-[#0c447c] text-white px-6 py-3 font-bold transition">
               <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" /> Leave a Google Review
             </a>
-            <a
-              href="https://www.facebook.com/vegacleaningservices"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1877f2] hover:bg-[#0c5dc7] text-white px-6 py-3 font-bold transition"
-            >
+            <a href="https://www.facebook.com/vegacleaningservices" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#1877f2] hover:bg-[#0c5dc7] text-white px-6 py-3 font-bold transition">
               <Facebook className="h-5 w-5" /> Review on Facebook
             </a>
           </div>
         </div>
       </section>
 
-      {/* BOTTOM CTA */}
       <section className="py-20 bg-gradient-to-br from-[#1d9e75] to-[#178a64] text-white">
         <div className="container-x text-center max-w-2xl">
           <h2 style={{ fontSize: "clamp(28px, 5vw, 44px)" }}>Experience the 5-Star Difference</h2>

@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { SiteLayout } from "@/components/site/Layout";
+import { useSeo } from "@/lib/seo";
 import { SERVICES, CITIES, REVIEWS } from "@/components/site/data";
 import { MessageSquare, Phone, Mail, Star, MapPin, ArrowRight, Check } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
@@ -9,20 +10,6 @@ import afterKitchen from "@/assets/after-kitchen.jpg";
 import beforeBathroom from "@/assets/before-bathroom.jpg";
 import afterBathroom from "@/assets/after-bathroom.jpg";
 import serviceAreasMap from "@/assets/service-areas.jpg";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Vegas Clean LLC | Professional Cleaning Northwest Indiana" },
-      { name: "description", content: "Residential & commercial cleaning in Hammond, Munster, Schererville and 9 more NW Indiana cities. Bilingual, pet-friendly. Text (219) 546-0135." },
-      { property: "og:title", content: "Vegas Clean LLC — Northwest Indiana Cleaning" },
-      { property: "og:description", content: "Reliable, thorough, guaranteed cleaning. Hablamos Español." },
-      { property: "og:url", content: "/" },
-    ],
-    links: [{ rel: "canonical", href: "/" }],
-  }),
-  component: HomePage,
-});
 
 function CTAButtons({ variant = "hero" }: { variant?: "hero" | "compact" }) {
   return (
@@ -37,19 +24,19 @@ function CTAButtons({ variant = "hero" }: { variant?: "hero" | "compact" }) {
   );
 }
 
-function HomePage() {
+export default function HomePage() {
+  useSeo({
+    title: "Vegas Clean LLC | Professional Cleaning Northwest Indiana",
+    description: "Residential & commercial cleaning in Hammond, Munster, Schererville and 9 more NW Indiana cities. Bilingual, pet-friendly. Text (219) 546-0135.",
+    ogTitle: "Vegas Clean LLC — Northwest Indiana Cleaning",
+    ogDescription: "Reliable, thorough, guaranteed cleaning. Hablamos Español.",
+    path: "/",
+  });
+
   return (
     <SiteLayout>
-      {/* HERO */}
       <section className="relative overflow-hidden text-white">
-        <img
-          src={heroBg}
-          alt="Bright clean Midwest home interior — Vegas Clean LLC"
-          className="absolute inset-0 w-full h-full object-cover"
-          width={1920}
-          height={896}
-          fetchPriority="high"
-        />
+        <img src={heroBg} alt="Bright clean Midwest home interior — Vegas Clean LLC" className="absolute inset-0 w-full h-full object-cover" width={1920} height={896} fetchPriority="high" />
         <div className="absolute inset-0 bg-gradient-to-br from-[#0c447c]/95 via-[#185fa5]/85 to-[#0c447c]/90" aria-hidden />
         <div className="relative container-x py-20 sm:py-28 lg:py-36">
           <div className="max-w-3xl animate-fade-up">
@@ -72,7 +59,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TRUST BAR */}
       <section className="bg-[#0c447c] text-white">
         <div className="container-x py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
@@ -89,7 +75,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES */}
       <section className="py-20 bg-[#f4f7fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -100,14 +85,7 @@ function HomePage() {
             {SERVICES.map((s) => (
               <div key={s.name} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition border border-[#e6f1fb]">
                 <div className="aspect-[4/3] overflow-hidden bg-[#e6f1fb]">
-                  <img
-                    src={s.image}
-                    alt={s.alt}
-                    loading="lazy"
-                    width={800}
-                    height={600}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                  <img src={s.image} alt={s.alt} loading="lazy" width={800} height={600} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-[#0c447c]"><span className="mr-2">{s.icon}</span>{s.name}</h3>
@@ -125,7 +103,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT SNIPPET */}
       <section className="py-20 bg-white">
         <div className="container-x grid lg:grid-cols-2 gap-12 items-center">
           <div className="rounded-3xl overflow-hidden aspect-[4/5] bg-[#e6f1fb] shadow-xl">
@@ -149,7 +126,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* BEFORE & AFTER */}
       <section className="py-20 bg-[#f4f7fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -179,7 +155,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
       <section className="py-20 bg-[#0c447c] text-white">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -205,7 +180,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* STATS */}
       <section className="py-16 bg-white">
         <div className="container-x grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
@@ -222,7 +196,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
       <section className="py-20 bg-[#e6f1fb]">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-12">
@@ -247,7 +220,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SERVICE AREAS */}
       <section className="py-20 bg-[#0c447c] text-white">
         <div className="container-x">
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -267,7 +239,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* BILINGUAL */}
       <section className="py-14 bg-[#1d9e75] text-white">
         <div className="container-x text-center">
           <h2 style={{ fontSize: "clamp(24px, 4vw, 36px)" }}>Hablamos Español — We Speak Spanish!</h2>
@@ -280,7 +251,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="py-20 bg-gradient-to-br from-[#1d9e75] to-[#178a64] text-white">
         <div className="container-x text-center max-w-2xl">
           <h2 style={{ fontSize: "clamp(28px, 5vw, 44px)" }}>Ready for a Spotless Home?</h2>
